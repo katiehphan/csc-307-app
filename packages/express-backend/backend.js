@@ -65,13 +65,33 @@ const users = {
     res.send();
   });
   
-  app.get("/users/:id", (req, res) => {
-    const id = req.params["id"]; //or req.params.id
-    let result = findUserById(id);
-    if (result === undefined) {
-      res.status(404).send("Resource not found.");
+  app.delete("/users/:id", (req, res) => {
+    const id = req.params["id"];
+    const userIndex = users.users_list.findIndex((user) => user.id === id);
+  
+    if (userIndex === -1) {
+      res.status(404).send({ message: "User not found" });
     } else {
-      res.send(result);
+      users.users_list.splice(userIndex, 1); // Remove user from list
+      res.status(200).send({ message: `User with ID ${id} deleted` });
+    }
+  });
+
+  app.get("/users/filter", (req, res) => {
+    const { name, job } = req.query;
+  
+    if (!name || !job) {
+      res.status(400).send({ message: "Please provide both name and job as query parameters" });
+    } else {
+      const filteredUsers = users.users_list.filter(
+        (user) => user.name === name && user.job === job
+      );
+  
+      if (filteredUsers.length === 0) {
+        res.status(404).send({ message: "No users found matching the criteria" });
+      } else {
+        res.status(200).send({ users_list: filteredUsers });
+      }
     }
   });
 
