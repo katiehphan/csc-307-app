@@ -4,8 +4,8 @@ function TableHeader() {
   return (
     <thead>
       <tr>
-        <th>ID</th> {/* Added ID Column */}
         <th>Name</th>
+        <th>ID</th> {/* Added ID Column */}
         <th>Job</th>
         <th>Remove</th>
       </tr>
@@ -16,8 +16,8 @@ function TableHeader() {
 function TableBody({ characterData, removeCharacter }) {
   const rows = characterData.map((row) => (
     <tr key={row.id}> {/* Using row.id instead of index */}
-      <td>{row.id}</td> {/* Display User ID */}
       <td>{row.name}</td>
+      <td>{row.id}</td> {/* Display User ID */}
       <td>{row.job}</td>
       <td>
         <button onClick={() => removeCharacter(row.id)}>Delete</button> {/* Use ID for deletion */}
