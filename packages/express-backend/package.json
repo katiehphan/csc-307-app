@@ -6,7 +6,7 @@
     "dev": "npx nodemon backend.js",
     "start": "node backend.js"
   },
-  "author": "James Tran",
+  "author": "Katie Phan",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
