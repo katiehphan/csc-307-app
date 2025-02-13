@@ -26,13 +26,13 @@ function MyApp() {
 
 
   // Function to remove a character from backend
-  function removeOneCharacter(id) {
-    fetch(`http://localhost:8000/users/${id}`, {
+  function removeOneCharacter(_id) {
+    fetch(`http://localhost:8000/users/${_id}`, {
       method: "DELETE",
     })
       .then((res) => {
         if (res.status === 204) {
-          setCharacters((prev) => prev.filter((user) => user.id !== id));
+          setCharacters((prev) => prev.filter((user) => user._id !== _id));
         } else {
           console.log("Error deleting user");
         }
